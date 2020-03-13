@@ -1,0 +1,25 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  r-base \
+  man \
+  locales
+
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+   && locale-gen en_US.utf8 \
+   && /usr/sbin/update-locale LANG=en_US.UTF-8
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  libssl-dev \
+  libxml2-dev \
+  libmariadbclient-dev \
+  libmariadb-client-lgpl-dev \
+  libcurl4-openssl-dev \
+  libpq-dev
+
+RUN R -e "options(warn = 2); install.packages('DBI',    dependencies=TRUE, Ncpu=5, repos='http:/cran.uib.no/')"
+RUN R -e "options(warn = 2); install.packages('dplyr',  dependencies=TRUE, Ncpu=5, repos='http:/cran.uib.no/')"
+RUN R -e "options(warn = 2); install.packages('dbplyr', dependencies=TRUE, Ncpu=5, repos='http:/cran.uib.no/')"
+
+RUN mkdir /cluster /work /tsd /projects /usit
+
