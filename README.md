@@ -12,8 +12,8 @@ make
 
 ## Build a custom image
 
-  * Add a new `Dockerfile_new-name`
-  * Add `simg_modules := new-name` to `singularity/make_simg.mk`.  
+  * Add a new `Dockerfile_new-name` in [`./singulariy/`](./singularity)
+  * Add `simg_modules := new-name` to [`singularity/make_simg.mk`](./singularity/make_simg.mk)
     (Or define in calling Makefile)
   * Run `make prepare_offline_simg`
 
@@ -29,7 +29,7 @@ Run
 ```
 make prepare_offline_simg
 ```
-Singularity images will be written to `singulariy/`.
+Singularity images will be written to [`./singulariy/`](./singularity)
 
 ## 
 
